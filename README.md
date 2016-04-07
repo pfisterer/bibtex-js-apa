@@ -12,3 +12,5 @@ Feel free to email me at Joseph.Austerweil@gmail.com if you have any questions!
 
 ## Changes in this fork
 In addition to "if" you can use "not". See the template for an example.
+
+Bower file (use ```bower install -S https://github.com/pfisterer/bibtex-js-apa.git```)
