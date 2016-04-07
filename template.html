@@ -1,81 +1,102 @@
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<script type="text/javascript" src="priority-queue.js"></script>
-		<script type="text/javascript" src="bibtex_js.js"></script>
-		<!-- Insert your bibtex entries in "bibtex_input" (or dynamically load them from a .bib file on your server) !-->
-		<div id="bibtex_input" style="display:none;">
-			@article{austerweil13rev,
-			author = {J. L. Austerweil and T. L. Griffiths},
-			title = {A nonparametric {B}ayesian framework for constructing flexible feature representations},
-			journal = {Psychological Review},
-			year = {2013},
-			volume = {120},
-			number = {4},
-			pages = {817-851},
-			abstract = {Representations are a key explanatory device used by cognitive psychologists to account for human behavior. Understanding the effects of context and experience on the representations people use is essential, because if two people encode the same stimulus using different representations, their response to that stimulus may be different. We present a computational framework that can be used to define models that flexibly construct feature representations (where by a feature we mean a part of the image of an object) for a set of observed objects, based on nonparametric Bayesian statistics. Austerweil and Griffiths (2011) presented an initial model constructed in this framework that captures how the distribution of parts affects the features people use to represent a set of objects. We build on this work in three ways. First, although people use features that can be transformed on each observation (e.g., translate on the retinal image), many existing feature learning models can only recognize features that are not transformed (occur identically each time). Consequently, we extend the initial model to infer features that are invariant over a set of transformations, and learn different structures of dependence between feature transformations. Second, we compare two possible methods for capturing the manner that categorization affects feature representations. Finally, we present a model that learns features incrementally, capturing an effect of the order of object presentation on the features people learn. We conclude by considering the implications and limitations of our empirical and theoretical results.},
-			url={http://dx.doi.org/10.1037/a0034194}
-		}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript" src="priority-queue.js"></script>
+	<script type="text/javascript" src="bibtex_js.js"></script>
+	<!-- Insert your bibtex entries in "bibtex_input" (or dynamically load them from a .bib file on your server) !-->
+	<div id="bibtex_input" style="display:none;">
+
+		@article{pfisterer2016businessmodel, abstract={Smart devices and cyber-physical systems, which are interconnected to IT systems and services, form the basis for the arising Internet of Everything, opening up new economic opportunities for its participants and users beyond its technological aspects and challenges. While today’s e-business scenarios are mostly dominated by a few centralized online platforms, future business models, which will be feasible for the Internet of Everything, need to address special requirements. Such business models, e.g., leveraging the possibilities of smart cities, need to cope with arbitrary combinations of products and services orchestrated into complex products in a highly distributed and dynamic environment. Furthermore, these arbitrary combinations are influenced by real-time context information derived from sensor networks or IT systems, as well as the users’ requirements and preferences. The complexity of finding the optimal product/service combination overstrains users and leads to decisions according to the principle of adverse selection (i.e., choosing good enough instead of optimal). Such e-business models require an appropriate underlying value generation architecture that supports users in this process. In this paper, we develop a business model that addresses these problems. In addition, we present the Distributed Market Spaces (DMS) software-system architecture as a possible implementation, which enables the aforementioned decentralized and context-centric e-business scenario and leverages the commercial possibilities of smart cities.}, author={Pfisterer, Dennis and Radonjic-Simic, Mirjana and Reichwald, Julian}, journal={Journal of Sensor and Actuator Networks}, number=2, pages=7, title={Business Model Design and Architecture for the Internet of Everything}, url={http://www.mdpi.com/2224-2708/5/2/7}, volume=5, year=2016, }
+
 	</div>
+
+	<script>
+		function bibtex_js_draw() {
+			$(".bibtex_template").hide();
+			$("#bibtex_input").load("bib/labpapers.bib", function() {
+				(new BibtexDisplay()).displayBibtex($("#bibtex_input").text(), $("#bibtex_display"));
+			})
+
+		}
+
+		// check whether or not jquery is present
+		if (typeof jQuery == 'undefined') {
+			// an interesting idea is loading jquery here. this might be added
+			// in the future.
+			alert("Please include jquery in all pages using bibtex_js!");
+		} else {
+			// draw bibtex when loaded
+			$(document).ready(function() {
+				// check for template, add default
+				if ($(".bibtex_template").size() == 0) {
+					$("body").append("<div class=\"bibtex_template\"><div class=\"if author\" style=\"font-weight: bold;\">\n  <span class=\"if year\">\n    <span class=\"year\"></span>, \n  </span>\n  <span class=\"author\"></span>\n  <span class=\"if url\" style=\"margin-left: 20px\">\n    <a class=\"url\" style=\"color:black; font-size:10px\">(view online)</a>\n  </span>\n</div>\n<div style=\"margin-left: 10px; margin-bottom:5px;\">\n  <span class=\"title\"></span>\n</div></div>");
+				}
+
+				bibtex_js_draw();
+			});
+		}
+
+	</script>
 </head>
 
 <!-- The references will be populated in "bibtex_display" !-->
-<div id="bibtex_display">   
+<div id="bibtex_display">
 </div>
 <div class="bibtex_template">
-	<div class ="well">
-		<div class ="container">
-			<div class="if author" style="font-weight: bold;">
-				<span class="author"></span>
-				<span class="if year"> (<span class="year"></span>) </span>
-				<span class="if url" style="margin-left: 20px">
-					<a class="url " style="color:black; font-size:10px">[Link]</a>
+	<div class="well">
+		<div class="container" style="display: inline;">
+
+			<div class="if author" style="display: inline;">
+				<span class="author" style="display: inline;"></span>
+				<span class="if year " style="display: inline;">
+					(<span class="year "></span>)
 				</span>
+				<div class="if url" style="display: inline;">
+					<a class="url " style="display: inline;">
+						<span class="title " style="font-weight: bold;" style="display: inline;"></span>
+					</a>
+				</div>
+				<div class="not url" style="display: inline;">
+					<span class="title " style="font-weight: bold;" style="display: inline;"></span>
+				</div>
 			</div>
 
-			<!-- This div is what is used to determine what is displayed from the bib entry. It is written to produce (roughly) APA formatting, though it is not perfect... !-->
-			<div style="margin-left: 10px; margin-bottom:5px;">
-				<span class="title "></span>.
-				<span class="if editor ">
+
+
+			<span class="if editor ">
 					In <span class="editor "></span> (Eds.),
-				</span>
-				<span class="if booktitle ">
+			</span>
+			<span class="if booktitle ">
 					<span class="booktitle " style="font-style: italic;"></span>
-					<span class="if pages ">
+			<span class="if pages ">
 						(p. <span class="pages "></span>).
-					</span>
-					<span class="if address "><span class="address "></span>:</span>
-					<span class="if publisher "><span class="publisher "></span>.</span>
-				</span>
-				<span class="if journal " style="font-style: italic;">
+			</span>
+			<span class="if address "><span class="address "></span>:</span>
+			<span class="if publisher "><span class="publisher "></span>.</span>
+			</span>
+			<span class="if journal " style="font-style: italic;">
 					<span class="journal"></span>,
-				</span>
-				<span class="if volume " style="font-style: italic;">
+			</span>
+			<span class="if volume " style="font-style: italic;">
 					<span class="volume"></span>
-				</span>
-				<span class="if number ">
+			</span>
+			<span class="if number ">
 					(<span class="number "></span>),
-				</span>
-				<span class="if journal ">
+			</span>
+			<span class="if journal ">
 					<span class="if pages ">
 						<span class="pages "></span>.
-					</span>
-				</span>
-			</div>
+			</span>
+			</span>
+
 
 		</div>
 	</div>
 </div>
-<div id="footer">
-	<div class="container">
-		<p class="muted credit">Made with <a href="http://getbootstrap.org">Bootstrap</a>,
-			<a href="http://bibtex-js.googlecode.com/">bibtex-js</a>,  <a href="http://github.com/AusterweilLab/bibtex-js-apa/"bibtex-js-apa>bibtex-js-apa</a>,
-			and <a href="https://github.com/adamhooper/js-priority-queue">js-priority-queue</a>
-		</p>
-	</div>
 
-</div>
 </body>
+
 </html>

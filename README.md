@@ -8,3 +8,7 @@ If you want to load your bibtex references from a file on your server, edit the 
 This project extends bibtex-js (https://code.google.com/p/bibtex-js/) uses priority-queue-js (https://github.com/adamhooper/js-priority-queue), jQuery (https://jquery.com), and Bootstrap 3.0 (http://getbootstrap.com/).
 
 Feel free to email me at Joseph.Austerweil@gmail.com if you have any questions!
+
+
+## Changes in this fork
+In addition to "if" you can use "not". See the template for an example.
